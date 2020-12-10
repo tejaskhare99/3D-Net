@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from google.colab import drive
-drive.mount('/content/drive')
-
-# Commented out IPython magic to ensure Python compatibility.
 import numpy as np
 from matplotlib import pyplot as plt
 from torchvision import datasets, transforms
@@ -110,8 +106,8 @@ def train(epoch):
       train_losses.append(loss.item())
       train_counter.append(
         (batch_idx*64) + ((epoch-1)*len(train_loader.dataset)))
-      torch.save(network.state_dict(), '/content/drive/MyDrive/model.pth')
-      torch.save(optimizer.state_dict(), '/content/drive/MyDrive/optimizer.pth')
+      torch.save(network.state_dict(), '/content/drive/MyDrive/model.pth')                #Saved on Drive
+      torch.save(optimizer.state_dict(), '/content/drive/MyDrive/optimizer.pth')          #Saved on Drive
 
 def test():
   network.eval()
@@ -132,7 +128,7 @@ def test():
 test()
 for epoch in range(1, n_epochs + 1):
   train(epoch)
-  test()
+  test()                                                      #Test set: Avg. loss: 0.0977, Accuracy: 9695/10000 (97%)
 
 fig = plt.figure()
 plt.plot(train_counter, train_losses, color='blue')
