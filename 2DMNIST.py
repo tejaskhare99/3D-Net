@@ -63,6 +63,8 @@ for i in range(6):
   plt.yticks([])
 fig
 
+##################  MODEL  #####################
+
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -81,6 +83,8 @@ class Net(nn.Module):
         x = self.fc2(x)
         return F.log_softmax(x)
 
+ #################################################     
+      
 # print(Net())
 network = Net()
 optimizer = optim.SGD(network.parameters(), lr=learning_rate,
@@ -90,6 +94,8 @@ train_losses = []
 train_counter = []
 test_losses = []
 test_counter = [i*len(train_loader.dataset) for i in range(n_epochs + 1)]
+
+###################### TRAIN LOOP #######################
 
 def train(epoch):
   network.train()
@@ -109,6 +115,8 @@ def train(epoch):
       torch.save(network.state_dict(), '/content/drive/MyDrive/model.pth')                #Saved on Drive
       torch.save(optimizer.state_dict(), '/content/drive/MyDrive/optimizer.pth')          #Saved on Drive
 
+  ########################################################    
+      
 def test():
   network.eval()
   test_loss = 0
