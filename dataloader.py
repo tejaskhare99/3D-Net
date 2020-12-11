@@ -35,7 +35,7 @@ class Dataset2d_3d(Dataset):
 
 if __name__=='__main__':
     Dataset2d_3d()
-    
+
 
 
 
