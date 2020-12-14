@@ -1,23 +1,44 @@
-from training_func import train
-from DataLoader import get_device, make_dir
-from network import net
-from testing_func import test_image_reconstruction
+import argparse
 import torch 
+from torch.utils.data import DataLoader
+from training import train
+from dataloader import Dataset2d_3d
+from network import CNN_Autoencoder
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--mode', type=str,  default='train')
+parser.add_argument('--epochs',type=int,default=50)
+
+def train_model(args,device):
+    dataset = Dataset2d_3d()
+    train_loader = DataLoader(dataset,pin_memory=True,shuffle=True)
+    model = CNN_Autoencoder()
+    criterion = torch.nn.MSELoss()
+    optimizer = torch.optim.Adam(model.parameters())
+    train(model, train_loader, optimizer , criterion , device, args.epochs)
 
 
-device = get_device()
-print(device)
-# load the neural network onto the device
-net.to(device)
-make_dir()
-# train the network
-train_loss = train(model, trainloader, NUM_EPOCHS)
-torch.save(model.state_dict(), '/content')
-plt.figure()
-plt.plot(train_loss)
-plt.title('Train Loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.savefig('deep_ae_mnist_loss.png')
-# test the network
-test_image_reconstruction(model, testloader)
+
+def run_inference():
+    pass
+
+def evaluate_model(path):
+    pass
+
+if __name__ == '__main__':
+    args = parser.parse_args()
+    if torch.cuda.is_available():
+        device = 'cuda'
+    else:
+        device = 'cpu'
+
+    if(args.mode=='train'):
+        train_model(args,device)
+
+
+
+
+
+
+
+

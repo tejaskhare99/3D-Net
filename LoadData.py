@@ -10,6 +10,7 @@ import torch.nn.functional as F
 from torchvision import datasets
 from torch.utils.data import DataLoader
 #from torchvision.utils import save_image
+from torchvision.utils import save_image
 
 NUM_EPOCHS = 50
 LEARNING_RATE = 1e-3

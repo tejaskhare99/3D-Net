@@ -5,10 +5,11 @@ import torch.nn as nn
 import torch.optim as optim
 import matplotlib.pyplot as plt
 import torch.nn.functional as F
+from torch.nn import Conv2d , MaxPool2d , ConvTranspose3d ,Upsample
 
-class Autoencoder(nn.Module):
+class LinearAutoencoder(nn.Module):
     def __init__(self):
-        super(Autoencoder, self).__init__()
+        super(LinearAutoencoder, self).__init__()
         ## encoder ##
         self.enc1 = nn.Linear(in_features=784, out_features=256)
         self.enc2 = nn.Linear(in_features=256, out_features=128)
@@ -38,10 +39,38 @@ class Autoencoder(nn.Module):
 
 # initialize the NN
 # encoding_dim = 32
-net = Autoencoder()
-#print(model)
+class CNN_Autoencoder(nn.Module):
+    def __init__(self):
+        super(CNN_Autoencoder, self).__init__()
+        self.encoder = nn.Sequential(Conv2d(1,16,kernel_size=3,padding='same',stride=1),
+                                     nn.ReLU(inplace=True),
+                                     MaxPool2d(2,2),
 
-criterion = nn.MSELoss()
+                                     Conv2d(16,8,kernel_size=3,padding='same',stride=1),
+                                     nn.ReLU(inplace=True),
+                                     MaxPool2d(2,2),
+                                     Conv2d(8,8,kernel_size=3,padding='same',stride=1))
 
-# specify loss function
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+        self.decoder = nn.Sequential(
+            ConvTranspose3d(8,16,kernel_size=2,padding='same',stride=1),
+        Upsample(),
+            ConvTranspose3d(16, 1, kernel_size=2, padding='same', stride=1),
+            Upsample(),
+        ConvTranspose3d(1, 1, kernel_size=2, padding='same', stride=1),
+            Upsample(),
+
+
+
+        )
+
+    def forward(self,x):
+        x = self.encoder(x)
+        print(x.shape)
+        x = self.decoder(x)
+        return x
+
+
+
+if __name__ == '__main__':
+    CNN = CNN_Autoencoder()
+    print(CNN)

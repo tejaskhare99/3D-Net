@@ -22,7 +22,7 @@ class Dataset2d_3d(Dataset):
         x,y = self.x[item],self.y[item]
         x_2d = self.map_label(y)
 
-        return x,y
+        return x,x_2d
 
 
     def map_label(self,index):
