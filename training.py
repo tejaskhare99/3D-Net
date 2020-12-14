@@ -1,5 +1,5 @@
 from network import net
-from LoadData import trainloader
+from LoadData import trainloader, NUM_EPOCHS
 import os
 import torch 
 import torchvision
