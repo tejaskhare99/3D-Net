@@ -11,6 +11,14 @@ from torchvision import datasets
 from torch.utils.data import DataLoader
 #from torchvision.utils import save_image
 
+NUM_EPOCHS = 50
+LEARNING_RATE = 1e-3
+BATCH_SIZE = 128
+# image transformations
+transform = transforms.Compose([
+    transforms.ToTensor(),
+])
+
 transform = transforms.Compose([
     transforms.ToTensor(),
 ])
