@@ -46,3 +46,20 @@ testloader = DataLoader(
     batch_size=BATCH_SIZE, 
     shuffle=True
 )
+
+
+def get_device():
+    if torch.cuda.is_available():
+        device = 'cuda:0'
+    else:
+        device = 'cpu'
+    return device
+
+def make_dir():
+    image_dir = 'MNIST_Images'
+    if not os.path.exists(image_dir):
+        os.makedirs(image_dir)
+
+def save_decoded_image(img, epoch):
+    img = img.view(img.size(0), 1, 28, 28)
+    save_image(img, './MNIST_Images/linear_ae_image{}.png'.format(epoch))
