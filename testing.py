@@ -4,6 +4,7 @@ import os
 import torch 
 import torchvision
 import torch.nn as nn
+from torchvision.utils import save_image
 
 def test_image_reconstruction(net, testloader):
      for batch in testloader:
