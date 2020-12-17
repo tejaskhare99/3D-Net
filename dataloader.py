@@ -22,6 +22,7 @@ class Dataset2d_3d(Dataset):
         x,y = self.x[item],self.y[item]
         x_2d = self.map_label(y)
         x_2d = np.array(x_2d.values).reshape(1,28,28)
+        x = x.reshape(1,16,16,16)
 
 
         return x_2d,x

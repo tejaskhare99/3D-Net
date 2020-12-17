@@ -13,6 +13,7 @@ def train_model(args,device):
     dataset = Dataset2d_3d()
     train_loader = DataLoader(dataset,pin_memory=True,shuffle=True,batch_size=64)
     model = CNN_Autoencoder()
+    print(model)
     criterion = torch.nn.MSELoss()
     optimizer = torch.optim.Adam(model.parameters())
     train(model, train_loader, optimizer , criterion , device, args.epochs)
