@@ -60,10 +60,10 @@ class CNN_Autoencoder(nn.Module):
 
             ConvTranspose3d(16, 32, kernel_size=3, stride=1),
             nn.ReLU(inplace=True),
-            ConvTranspose3d(32, 64, kernel_size=3, stride=1),
+            ConvTranspose3d(32, 48, kernel_size=3, stride=1),
             nn.ReLU(inplace=True),
 
-            ConvTranspose3d(64,1 , kernel_size=3, stride=1),
+            ConvTranspose3d(48,1 , kernel_size=3, stride=1),
             nn.ReLU(inplace=True),
 
 
