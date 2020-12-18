@@ -1,4 +1,5 @@
 from tqdm import tqdm
+from utils import save_model
 
 def train(net, trainloader, optimizer , criterion , device, NUM_EPOCHS):
     net = net.to(device)
