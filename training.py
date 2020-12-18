@@ -1,4 +1,5 @@
 from tqdm import tqdm
+
 def train(net, trainloader, optimizer , criterion , device, NUM_EPOCHS):
     net = net.to(device)
     criterion = criterion.to(device)
@@ -19,11 +20,25 @@ def train(net, trainloader, optimizer , criterion , device, NUM_EPOCHS):
                 loss = criterion(outputs, image_3d)
                 loss.backward()
                 optimizer.step()
-                running_loss += loss.item()
+                running_loss += loss.item()   
         
         loss = running_loss / len(trainloader)
+        state = {
+            'epoch': epoch + 1,
+            'valid_loss_min': loss,
+            'state_dict': net.state_dict(),
+            'optimizer': optimizer.state_dict(),
+        } 
+        print("\nSaving model...\n")
+        save_model(state, False, best_model_dir)
+        
+        
         train_loss.append(loss)
         print('Epoch {} of {}, Train Loss: {:.3f}'.format(
             epoch+1, NUM_EPOCHS, loss))
+        
+        min_loss = min(train_loss) 
+        min_loss_epoch = train_loss.index(min(train_loss)) + 1
+        print("Best model found at epoch {} with a loss of: {}".format(min_loss_epoch, min_loss))
 
     return train_loss
