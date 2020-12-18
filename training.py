@@ -30,7 +30,7 @@ def train(net, trainloader, optimizer , criterion , device, NUM_EPOCHS):
             'optimizer': optimizer.state_dict(),
         } 
         print("\nSaving model...\n")
-        save_model(state, False, best_model_dir)
+        save_model(state, path)
         
         
         train_loss.append(loss)
