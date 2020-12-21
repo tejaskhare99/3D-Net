@@ -1,5 +1,6 @@
 from tqdm import tqdm
 from utils import plot3d
+from torch import save
 
 def train(net, trainloader, optimizer, criterion, device, NUM_EPOCHS):
     net = net.to(device)
@@ -28,6 +29,8 @@ def train(net, trainloader, optimizer, criterion, device, NUM_EPOCHS):
         loss = running_loss / len(trainloader)
         train_loss.append(loss)
         print('Epoch {} of {}, Train Loss: {:.3f}'.format(
+            epoch + 1, NUM_EPOCHS, loss))
+        save(net,"/model/"+'Epoch {} of {}, Train Loss: {:.3f}'.format(
             epoch + 1, NUM_EPOCHS, loss))
 
     return train_loss

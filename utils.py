@@ -18,7 +18,7 @@ def plot3d(number):
     print(number.shape)
     if(number.shape== (16,16,16)):
         number = rasterise(number)
-        print(number)
+
 
     else:
         number = number[0].reshape(16,16,16)
