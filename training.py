@@ -22,7 +22,7 @@ def train(net, trainloader, optimizer, criterion, device, NUM_EPOCHS):
                 loss.backward()
                 optimizer.step()
                 running_loss += loss.item()
-                plot3d(outputs[0].detach().numpy())
+                plot3d(outputs[0].detach().cpu().numpy())
 
 
         loss = running_loss / len(trainloader)
