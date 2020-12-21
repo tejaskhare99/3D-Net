@@ -21,8 +21,8 @@ def plot3d(number):
         print(number)
 
     else:
-        number = number.reshape(16,16,16)
-        number = rasterise(number[0])
+        number = number[0].reshape(16,16,16)
+        number = rasterise(number)
 
     fig = px.scatter_3d(number, x='x', y='y', z='z')
     fig.show()
