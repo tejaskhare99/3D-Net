@@ -26,11 +26,13 @@ def train(net, trainloader, optimizer, criterion, device, NUM_EPOCHS):
                 plot3d(outputs[0].detach().cpu().numpy())
 
 
+
         loss = running_loss / len(trainloader)
         train_loss.append(loss)
         print('Epoch {} of {}, Train Loss: {:.3f}'.format(
             epoch + 1, NUM_EPOCHS, loss))
-        save(net,"/model/"+'Epoch {} of {}, Train Loss: {:.3f}'.format(
+        save(net,"./model/"+'Epoch {} of {}, Train Loss: {:.3f}'.format(
             epoch + 1, NUM_EPOCHS, loss))
+        save(net,"./model/latest")
 
     return train_loss
