@@ -4,17 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import h5py
 import numpy as np
-def plot3d(digit):
-    x_c = [r[0] for r in digit[1]]
-    y_c = [r[1] for r in digit[1]]
-    z_c = [r[2] for r in digit[1]]
-    trace1 = go.Scatter3d(x=x_c, y=y_c, z=z_c, mode='markers',
-                          marker=dict(size=12, color=z_c, colorscale='Viridis', opacity=0.7))
-
-    data = [trace1]
-    layout = go.Layout(height=500, width=600, title="Digit: " + str(digit[0][2]) + " in 3D space")
-    fig = go.Figure(data=data, layout=layout)
-    fig.show()
 
 def load_mnist(path):
     train_path = join(path,'mnist_train.csv')
@@ -23,6 +12,32 @@ def load_mnist(path):
     testmnist = pd.read_csv(test_path)
 
     return trainmnist,testmnist
+
+def plot3d(number):
+    import plotly.express as px
+    print(number.shape)
+    if(number.shape== (16,16,16)):
+        number = rasterise(number)
+        print(number)
+
+    else:
+        number = number.reshape(16,16,16)
+        number = rasterise(number[0])
+
+    fig = px.scatter_3d(number, x='x', y='y', z='z')
+    fig.show()
+
+def rasterise(number):
+    list = pd.DataFrame(columns=['x','y','z'])
+    for i in range(16):
+        for j in range(16):
+            for k in range(16):
+                if(number[i,j,k]>0.0):
+                   list = list.append({'x':i,'y':j,'z':k},ignore_index=True)
+    return list
+
+
+
 
 def load_mnist3d(path):
     with h5py.File(path, "r") as hf:
@@ -33,7 +48,7 @@ def load_mnist3d(path):
         targets_test = hf["y_test"][:]
 
         # Determine sample shape
-        sample_shape = (16, 16, 16, 3)
+
 
         # Reshape data into 3D format
         X_train = rgb_data_transform(X_train)

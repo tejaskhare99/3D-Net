@@ -6,7 +6,7 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 import torch.nn.functional as F
 from torch.nn import Conv2d , MaxPool2d , ConvTranspose3d ,Upsample
-
+# Network architectures
 class LinearAutoencoder(nn.Module):
     def __init__(self):
         super(LinearAutoencoder, self).__init__()
@@ -78,7 +78,7 @@ class CNN_Autoencoder(nn.Module):
         x = x.view(x.shape[0],-1).view(x.shape[0],8,3,1,3)
         #print(x.shape)
         x = self.decoder(x)
-        #print(x.shape)
+        print(x.shape)
         return x
 
 

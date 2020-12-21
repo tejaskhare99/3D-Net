@@ -21,7 +21,7 @@ def train_model(args,device):
     test_dataset = Dataset2d_3d(istrain=False)
     testloader = DataLoader(test_dataset, pin_memory=True, shuffle=True, batch_size=64)
     test(model,testloader,criterion,device)
-    torch.save(model,args.save_path)
+    #torch.save(model,args.save_path)
 
 
 
