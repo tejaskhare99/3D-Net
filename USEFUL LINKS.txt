@@ -1,3 +1,16 @@
 https://github.com/timzhang642/3D-Machine-Learning#datasets
 https://towardsdatascience.com/5-step-guide-to-generate-3d-meshes-from-point-clouds-with-python-36bad397d8ba
 https://cvgl.stanford.edu/projects/objectnet3d/
+
+Key Concepts - 
+  1. Camera intrinsic and extrinsic parameters and image formation - how a point from the real world gets projected onto the image plane
+  2. Image rectification - it is a process by which you transform your input images to simplify your job later on
+  3. Disparity map generation - finding the same points in image pairs and estimating the lateral displacement
+  4. Reconstruction - use the disparity values and the camera parameters to reconstruct the original 3d point
+
+Books - 
+  1. https://www.pdfdrive.com/multiple-view-geometry-in-computer-vision-second-edition-e33682210.html
+  2. The Geometry of Multiple Images by Olivier Faugeras
+  3. https://1lib.in/ireader/703743
+  4. https://1lib.in/ireader/5929338
+  
