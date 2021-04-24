@@ -20,3 +20,4 @@ Books -
   3. https://1lib.in/ireader/703743
   4. https://1lib.in/ireader/5929338
   
+The label data in 300W_LP is supposed to describe a 3D mesh corresponding to the position and shape of the face in the corresponding jpg. There are different ways of specifying a 3D mesh, the naive way is just to store the xyz coordinates for each of the vertices in the mesh, and remember how the edges and faces connect them. This is the format that we need the label in for PRNet. A more sophisticated and sometimes more useful way to store this information is with what is called a 3D Morphable Model. You can think of a morphable model as a lower dimensional encoding of the xyz coordinates of the vertices, similar to PCA. The script that we are running to generate training labels from the face3d repository is converting from morphable model coordinates to the xyz coordinates that we need.
